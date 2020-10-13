@@ -1,6 +1,8 @@
-package Share;
+package Share.Functions;
 
-public class Function {
+import Share.Functions.IFunction;
+
+public class TestFunction {
 
     public static double f(double x) {
         return Math.log(Math.pow(Math.sin(x),2) + 1) - 0.5;
@@ -29,6 +31,7 @@ public class Function {
     public static double hPrimeTwo(double x) {
         return Math.pow(Math.exp(1), x);
     }
+
 
     public static double[][] getA() {
         return new double[][]{

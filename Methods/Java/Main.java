@@ -1,7 +1,9 @@
+import Methods.Extra.Aikten;
+import Methods.Extra.Steffensen;
 import Methods.Matrix.Gauss;
 import Methods.Matrix.PartialPivot;
 import Methods.Matrix.TotalPivot;
-import Share.Function;
+import Share.Functions.TestFunction;
 import Share.MatrixUtil;
 
 public class Main {
@@ -17,6 +19,16 @@ public class Main {
         gausses[1] = partialPivot;
         gausses[2] = totalPivot;
 
+        Aikten aikten = new Aikten();
+        Steffensen steffensen = new Steffensen();
+
+        double res = steffensen.execute(x -> {
+            return Math.sqrt(10.0/(x+4));
+        }, 1E-7, 100, 1.5);
+
+        System.out.println(res);
+
+        /*
         try {
             for (Gauss method : gausses) {
 
@@ -25,16 +37,12 @@ public class Main {
                         {1, 1, 1},
                         {-1, 4, 1}
                 };
-                double[] b = {4, 2, 3};
-
-                //Answers x = -0.5, y = 0, z = 2.5
+                double[] b = {4, 2, 3}; //Answers x = -0.5, y = 0, z = 2.5
 
                 System.out.print("\u001B[31m" + method + "\u001B[0m");
 
-                MatrixUtil.printMatrix(Function.getA());
-
                 long ini = System.currentTimeMillis();
-                double[] res = method.execute(Function.getA(), Function.getB(), false);
+                double[] res = method.execute(TestFunction.getA(), TestFunction.getB(), false);
                 System.out.println(System.currentTimeMillis() - ini);
 
                 MatrixUtil.printArray(res);
@@ -44,10 +52,6 @@ public class Main {
             e.printStackTrace();
         }
 
+         */
     }
-
-
-
-
-
 }
