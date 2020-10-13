@@ -28,6 +28,7 @@ public class Main {
         double[] b2 = {4, 2, 3};
         double[] b3 = {4, 2, 3};
 
+
         Gauss gauss = new Gauss();
         PartialPivot partialPivot = new PartialPivot();
         TotalPivot totalPivot = new TotalPivot();
@@ -42,11 +43,12 @@ public class Main {
             System.out.println(System.currentTimeMillis()-ini);
             */
 
-            double[] res3 = totalPivot.gauss(matrix3, b3);
+            double[] res3 = partialPivot.execute(matrix3, b3);
 
             for (double v : res3) {
                 System.out.println(v);
             }
+
 
         } catch (Exception e) {
             e.printStackTrace();

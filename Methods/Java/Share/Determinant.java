@@ -10,7 +10,6 @@ public class Determinant {
      * @param matrix matrix
      * @return matrix determinant
      */
-
     public static double determinant(double[][] matrix) throws NullPointerException, NoDimensionMatrix, NotSquareMatrix {
         if (matrix == null) throw new NullPointerException();
         if (matrix.length == 0) throw new NoDimensionMatrix("Matrix dimension 0");

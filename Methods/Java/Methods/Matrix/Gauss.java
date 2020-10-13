@@ -8,34 +8,49 @@ import Share.MatrixUtil;
 
 public class Gauss {
 
-
-    public double[] gauss(double[][] matrix ,double[] b) throws NotSquareMatrix, NoDimensionMatrix, MatrixWithColumnZero {
+    public double[] execute(double[][] matrix ,double[] b) throws MatrixWithColumnZero, NotSquareMatrix, NoDimensionMatrix {
         Determinant.determinant(matrix);
+        return gauss(matrix, b);
+    }
+
+    private double[] gauss(double[][] matrix ,double[] b) throws MatrixWithColumnZero {
+
+        MatrixUtil.printMatrix(matrix);
+        MatrixUtil.printArray(b);
 
         for (int i = 0; i < matrix.length - 1; ++i) {
 
-            if (matrix[i][i] == 0) pivot(matrix, i, b);
+            System.out.println("Phase " + (i+1));
+
+            pivot(matrix, i, b);
+
+            MatrixUtil.printMatrix(matrix);
+            MatrixUtil.printArray(b);
 
             for (int j = i+1; j < matrix.length; ++j) {
 
                 double multiplicand = matrix[j][i] / matrix[i][i];
                 elimination(i, j, multiplicand, matrix, b);
             }
+            MatrixUtil.printMatrix(matrix);
+            MatrixUtil.printArray(b);
         }
 
+        MatrixUtil.printAmplifiedMatrix(matrix,b);
         return linealRegression(matrix, b);
     }
 
     void pivot(double[][] matrix, int index, double[] b) throws MatrixWithColumnZero {
-        int i = index + 1;
-        while (matrix[i][index] == 0){
-            ++i;
-            if (i >= matrix.length) throw new MatrixWithColumnZero("The matrix has a column full of 0");
+        if (matrix[index][index] == 0) {
+            int i = index + 1;
+            while (matrix[i][index] == 0) {
+                ++i;
+                if (i >= matrix.length) throw new MatrixWithColumnZero("The matrix has a column full of 0");
+            }
+            MatrixUtil.swapRows(matrix, i, index);
+            MatrixUtil.swapValues(b, i, index);
         }
-        MatrixUtil.swapRows(matrix, i, index);
-        MatrixUtil.swapValues(b, i, index);
     }
-
 
     void elimination(int row1, int row2, double multiplicand, double[][] matrix, double[] b) {
         for (int i = 0; i < matrix[row2].length; ++i) {
@@ -68,6 +83,4 @@ public class Gauss {
             return backwardSolve(MatrixUtil.frontCut(left,1), MatrixUtil.cut(xValues,1), newRight);
         }
     }
-
-
 }

@@ -1,32 +1,19 @@
 package Methods.Matrix;
 
+import Errors.MatrixWithColumnZero;
 import Errors.NoDimensionMatrix;
 import Errors.NotSquareMatrix;
-import Share.Determinant;
 import Share.MatrixUtil;
 
 public class TotalPivot extends PartialPivot{
 
     private int[] positionStamp;
 
+    @Override
+    public double[] execute(double[][] matrix, double[] b) throws NotSquareMatrix, NoDimensionMatrix, MatrixWithColumnZero {
 
-    public double[] gauss(double[][] matrix ,double[] b) throws NotSquareMatrix, NoDimensionMatrix {
-        Determinant.determinant(matrix);
-
-        positionStamp = new int[matrix.length];
-
-        for (int i = 0; i < matrix.length - 1; ++i) {
-
-            pivot(matrix, i, b);
-
-            for (int j = i+1; j < matrix.length; ++j) {
-
-                double multiplicand = matrix[j][i] / matrix[i][i];
-                elimination(i, j, multiplicand, matrix, b);
-            }
-        }
-
-        return sort(linealRegression(matrix, b), positionStamp);
+        initPositionStamp(matrix.length);
+        return sort(super.execute(matrix, b), positionStamp);
     }
 
     void pivot(double[][] matrix, int index, double[] b) {
@@ -48,6 +35,15 @@ public class TotalPivot extends PartialPivot{
         if (row != index) {
             MatrixUtil.swapRows(matrix, row, index);
             MatrixUtil.swapValues(b, row, index);
+        }
+    }
+
+    private void initPositionStamp(int length) {
+        if (positionStamp == null) {
+            positionStamp = new int[length];
+            for (int i = 0; i < length; i++) {
+                positionStamp[i] = i;
+            }
         }
     }
 

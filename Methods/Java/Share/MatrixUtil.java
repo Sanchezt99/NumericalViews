@@ -1,21 +1,6 @@
 package Share;
 
-import java.util.Arrays;
-
 public class MatrixUtil {
-
-
-    public static double[][] numberMatrix(int rows, int cols, double number){
-        double[][] onesMatrix = new double[rows][cols];
-
-        for (double[] matrix : onesMatrix) {
-            Arrays.fill(matrix, number);
-        }
-
-        printMatrix(onesMatrix);
-
-        return onesMatrix;
-    }
 
     public static double[] frontCut(double[] array, int cut) {
         double[] newArray = new double[array.length-cut];
@@ -66,5 +51,25 @@ public class MatrixUtil {
             }
         }
         System.out.println();
+    }
+
+    public static void printArray(double[] array) {
+        for (double v : array) {
+            System.out.print(v+ " ");
+        }
+        System.out.println();
+    }
+
+    public static double[][] amplifyMatrix(double[][] matrix, double[] array) {
+        double[][] amplifiedMatrix = new double[matrix.length][matrix.length + 1];
+        for (int i = 0; i < matrix.length; ++i) {
+            System.arraycopy(matrix[i], 0, amplifiedMatrix[i], 0, matrix.length);
+            amplifiedMatrix[i][matrix.length] = array[i];
+        }
+        return amplifiedMatrix;
+    }
+
+    public static void printAmplifiedMatrix(double[][] matrix, double[] array) {
+        printMatrix(amplifyMatrix(matrix, array));
     }
 }
