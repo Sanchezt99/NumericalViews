@@ -54,10 +54,12 @@ public class MatrixUtil {
     }
 
     public static void printArray(double[] array) {
-        for (double v : array) {
-            System.out.print(v+ " ");
+        System.out.print("{");
+        for (int i = 0; i < array.length; ++i) {
+            if (i + 1 < array.length) System.out.print(array[i]+ ", ");
+            else System.out.print(array[i]);
         }
-        System.out.println();
+        System.out.println("}");
     }
 
     public static double[][] amplifyMatrix(double[][] matrix, double[] array) {

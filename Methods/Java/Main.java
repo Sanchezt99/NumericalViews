@@ -1,55 +1,41 @@
 import Methods.Matrix.Gauss;
 import Methods.Matrix.PartialPivot;
 import Methods.Matrix.TotalPivot;
+import Share.Function;
+import Share.MatrixUtil;
 
 public class Main {
 
     public static void main(String[] args) {
-
-        double [][] matrix = {
-                {2,-1,2},
-                {1,1,1},
-                {-1,4,1}
-        };
-        //z = 2.5 y = 0 x = -0.5 {4 2 3}
-
-        double [][] matrix2 = {
-                {2,-1,2},
-                {1,1,1},
-                {-1,4,1}
-        };
-        double [][] matrix3 = {
-                {2,-1,2},
-                {1,1,1},
-                {-1,4,1}
-        };
-
-        double[] b = {4, 2, 3};
-        double[] b2 = {4, 2, 3};
-        double[] b3 = {4, 2, 3};
-
-
+        
         Gauss gauss = new Gauss();
         PartialPivot partialPivot = new PartialPivot();
         TotalPivot totalPivot = new TotalPivot();
+
+        Gauss[] gausses = new Gauss[3];
+        gausses[0] = gauss;
+        gausses[1] = partialPivot;
+        gausses[2] = totalPivot;
+
         try {
-            /*
-            long ini = System.currentTimeMillis();
-            gauss.gauss(matrix, b);
-            System.out.println(System.currentTimeMillis()-ini);
+            for (Gauss method : gausses) {
 
-            ini = System.currentTimeMillis();
-            partialPivot.gauss(matrix2, b2);
-            System.out.println(System.currentTimeMillis()-ini);
-            */
+                double[][] matrix = {
+                        {2, -1, 2},
+                        {1, 1, 1},
+                        {-1, 4, 1}
+                };
+                double[] b = {4, 2, 3};
+                //Answers x = -0.5, y = 0, z = 2.5
 
-            double[] res3 = partialPivot.execute(matrix3, b3);
+                System.out.print("\u001B[31m" + method + "\u001B[0m");
+                long ini = System.currentTimeMillis();
+                double[] res = method.execute(Function.A, Function.b, false);
+                System.out.println(System.currentTimeMillis() - ini);
 
-            for (double v : res3) {
-                System.out.println(v);
+                MatrixUtil.printArray(res);
+
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }

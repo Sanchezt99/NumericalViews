@@ -13,4 +13,9 @@ public class PartialPivot extends Gauss{
         MatrixUtil.swapRows(matrix, champion, index);
         MatrixUtil.swapValues(b, champion, index);
     }
+
+    @Override
+    public String toString() {
+        return "Partial Pivot: ";
+    }
 }

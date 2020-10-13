@@ -5,15 +5,17 @@ import Errors.NoDimensionMatrix;
 import Errors.NotSquareMatrix;
 import Share.MatrixUtil;
 
+import java.util.Arrays;
+
 public class TotalPivot extends PartialPivot{
 
     private int[] positionStamp;
 
     @Override
-    public double[] execute(double[][] matrix, double[] b) throws NotSquareMatrix, NoDimensionMatrix, MatrixWithColumnZero {
+    public double[] execute(double[][] matrix, double[] b, boolean print) throws NotSquareMatrix, NoDimensionMatrix, MatrixWithColumnZero {
 
         initPositionStamp(matrix.length);
-        return sort(super.execute(matrix, b), positionStamp);
+        return sort(super.execute(matrix, b, print), positionStamp);
     }
 
     void pivot(double[][] matrix, int index, double[] b) {
@@ -54,5 +56,10 @@ public class TotalPivot extends PartialPivot{
             sortedValues[positions[i]] = values[i];
 
         return sortedValues;
+    }
+
+    @Override
+    public String toString() {
+        return "Total Pivot: ";
     }
 }

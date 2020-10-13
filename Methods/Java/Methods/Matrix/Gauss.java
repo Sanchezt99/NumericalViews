@@ -8,9 +8,10 @@ import Share.MatrixUtil;
 
 public class Gauss {
 
-    public double[] execute(double[][] matrix ,double[] b) throws MatrixWithColumnZero, NotSquareMatrix, NoDimensionMatrix {
+    public double[] execute(double[][] matrix ,double[] b, boolean print) throws MatrixWithColumnZero, NotSquareMatrix, NoDimensionMatrix {
         Determinant.determinant(matrix);
-        return gauss(matrix, b);
+        if (print) return gauss(matrix, b);
+        return gaussNoPrint(matrix, b);
     }
 
     private double[] gauss(double[][] matrix ,double[] b) throws MatrixWithColumnZero {
@@ -37,6 +38,17 @@ public class Gauss {
         }
 
         MatrixUtil.printAmplifiedMatrix(matrix,b);
+        return linealRegression(matrix, b);
+    }
+
+    private double[] gaussNoPrint(double[][] matrix ,double[] b) throws MatrixWithColumnZero {
+        for (int i = 0; i < matrix.length - 1; ++i) {
+            pivot(matrix, i, b);
+            for (int j = i+1; j < matrix.length; ++j) {
+                double multiplicand = matrix[j][i] / matrix[i][i];
+                elimination(i, j, multiplicand, matrix, b);
+            }
+        }
         return linealRegression(matrix, b);
     }
 
@@ -82,5 +94,10 @@ public class Gauss {
             double newRight = right - left[0]*xValues[xValues.length-1];
             return backwardSolve(MatrixUtil.frontCut(left,1), MatrixUtil.cut(xValues,1), newRight);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Gauss: ";
     }
 }
