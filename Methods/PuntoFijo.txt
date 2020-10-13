@@ -1,0 +1,25 @@
+Inicio PuntoFijo
+
+    Recibir g(x)
+
+    Recibir f(x)
+
+    
+        Definir variables
+             int i = 0;
+             double x = 0;
+
+        Inicio While (ValorAbsoluto(f(x))>=1E-8 && i<=1000000) 
+            x = g(x);
+            i++;
+        Fin While
+
+        Inicio if(ValorAbsoluto(f(x)) < 1E-8){
+            print "Root: " + x;
+        }
+        else{
+            print "Not possible to obtain root"
+        }
+        Fin if
+
+Fin
