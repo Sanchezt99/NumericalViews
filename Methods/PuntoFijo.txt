@@ -1,8 +1,7 @@
 Start Fixed Point
 
-     Receive g (x)
-
-     Receive f (x)
+    Input: self, xi, tolerancia, iter, f(x), g(x)
+    Output: The root and iterations.
 
     
          Define variables
@@ -10,7 +9,7 @@ Start Fixed Point
               double x = 0;
 
          Start While (AbsoluteValue (f (x))> = 1E-8 && i <= 1000000)
-             x = g (x);
+             x = g(x);
              i ++;
          End While
 

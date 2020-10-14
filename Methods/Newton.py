@@ -1,5 +1,5 @@
 import math
-from . Function import Function
+from .Function import Function
 
 
 class Newton:
@@ -43,6 +43,7 @@ class Newton:
 
         if fx == 0:
             return f"{xi} is a root"
+            
         elif error < tol:
             return f"{xn} its an aproximation to a root with a tolerance of {tol}"
         elif dfx == 0:
