@@ -1,4 +1,5 @@
 import math
+<<<<<<< HEAD
 
 from scitools.StringFunction import StringFunction
 from math import *
@@ -15,6 +16,9 @@ class Function:
     def evaluate2(self, value):
         x = value
         return eval(self.input)
+=======
+from Function import Function
+>>>>>>> bfad0b53de3eb2c3b37d63fbd73c631602ef7c2d
 
 class Secant:
     def __init__(self):
