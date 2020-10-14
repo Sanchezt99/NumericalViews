@@ -1,3 +1,6 @@
+import Errors.MatrixWithColumnZero;
+import Errors.NoDimensionMatrix;
+import Errors.NotSquareMatrix;
 import Methods.Extra.Aikten;
 import Methods.Extra.Steffensen;
 import Methods.Matrix.Gauss;
@@ -26,9 +29,14 @@ public class Main {
             return Math.sqrt(10.0/(x+4));
         }, 1E-7, 100, 1.5);
 
-        System.out.println(res);
+        double res3 = aikten.execute(x -> {
+            return Math.cos(1.0/x);
+        }, 1E-7, 100);
 
-        /*
+        System.out.println("Steffensen " + res);
+        System.out.println("Aikten " + res3);
+
+
         try {
             for (Gauss method : gausses) {
 
@@ -37,21 +45,23 @@ public class Main {
                         {1, 1, 1},
                         {-1, 4, 1}
                 };
+
                 double[] b = {4, 2, 3}; //Answers x = -0.5, y = 0, z = 2.5
+
 
                 System.out.print("\u001B[31m" + method + "\u001B[0m");
 
                 long ini = System.currentTimeMillis();
-                double[] res = method.execute(TestFunction.getA(), TestFunction.getB(), false);
+                //double[] res2 = method.execute(TestFunction.getA(), TestFunction.getB(), true);
+                double[] res2 = method.execute(matrix, b, true);
                 System.out.println(System.currentTimeMillis() - ini);
 
-                MatrixUtil.printArray(res);
+                MatrixUtil.printArray(res2);
 
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-         */
     }
 }

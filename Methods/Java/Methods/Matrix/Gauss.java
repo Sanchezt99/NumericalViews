@@ -16,25 +16,22 @@ public class Gauss {
 
     private double[] gauss(double[][] matrix ,double[] b) throws MatrixWithColumnZero {
 
-        MatrixUtil.printMatrix(matrix);
-        MatrixUtil.printArray(b);
+        MatrixUtil.printAmplifiedMatrix(matrix, b);
 
         for (int i = 0; i < matrix.length - 1; ++i) {
 
-            System.out.println("Phase " + (i+1));
+            System.out.println("\u001B[31m" + "Phase " + (i+1) + "\u001B[0m");
 
             pivot(matrix, i, b);
 
-            MatrixUtil.printMatrix(matrix);
-            MatrixUtil.printArray(b);
+            MatrixUtil.printAmplifiedMatrix(matrix, b);
 
             for (int j = i+1; j < matrix.length; ++j) {
 
                 double multiplicand = matrix[j][i] / matrix[i][i];
                 elimination(i, j, multiplicand, matrix, b);
             }
-            MatrixUtil.printMatrix(matrix);
-            MatrixUtil.printArray(b);
+            MatrixUtil.printAmplifiedMatrix(matrix, b);
         }
 
         MatrixUtil.printAmplifiedMatrix(matrix,b);

@@ -1,6 +1,7 @@
 package Methods.Extra;
 
 import Share.Functions.IFunction;
+import Share.Measure;
 
 public class Steffensen {
 
@@ -14,7 +15,7 @@ public class Steffensen {
         x2 = f.evaluate(x1);
         x3 = aikten.acceleration(x0, x1, x2);
 
-        for (int i = 1; i <= maxIterations && aikten.absoluteError(x0, x3) > tolerance; ++i) {
+        for (int i = 1; i <= maxIterations && Measure.absoluteError(x0, x3) > tolerance; ++i) {
             x0 = x3;
             x1 = f.evaluate(x0);
             x2 = f.evaluate(x1);
