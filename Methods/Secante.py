@@ -1,5 +1,5 @@
 import math
-from Function import Function
+from .Function import Function
 
 class Secant:
     def __init__(self):
@@ -12,7 +12,7 @@ class Secant:
         fx0 = fun.evaluate(x0)
 
         if fx0 == 0:
-            return f"{x0} es raiz"
+            return f"{x0} is the root"
         else:
             fx1 = fun.evaluate(x1)
             cont = 0
@@ -41,13 +41,13 @@ class Secant:
                     [cont, str(x2), str("{:.2e}".format(fx1)), str("{:.2e}".format(error))])
 
         if fx1 == 0:
-            return f"{x1} es raíz"
+            return f"{x1} is the root"
         elif error < tol:
-            return f"{x1} es una aprox. a una raíz con una tolerancia = {tol}"
+            return f"{x1} is an approximation to a root with a tolerance = {tol}"
         elif den == 0:
-            return f"Hay una posible raíz multiple"
+            return f"There is a possible multiple root"
         else:
-            return f"Fracasó en {niter} iteraciones"
+            return f"Failed after {niter} iterations"
 
     def tabla_values(self):
         return self.values

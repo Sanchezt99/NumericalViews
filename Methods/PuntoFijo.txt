@@ -1,0 +1,25 @@
+Start Fixed Point
+
+     Receive g (x)
+
+     Receive f (x)
+
+    
+         Define variables
+              int i = 0;
+              double x = 0;
+
+         Start While (AbsoluteValue (f (x))> = 1E-8 && i <= 1000000)
+             x = g (x);
+             i ++;
+         End While
+
+         Start if (AbsoluteValue (f (x)) <1E-8) {
+             print "Root:" + x;
+         }
+         else {
+             print "Not possible to obtain root"
+         }
+         End if
+
+End
