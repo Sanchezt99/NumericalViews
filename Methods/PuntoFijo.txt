@@ -1,7 +1,7 @@
 Start Fixed Point
 
-    Input: self, xi, tolerancia, iter, f(x), g(x)
-    Output: The root and iterations.
+    Input: f(x), g(x), x0, tol, N.
+    Output: The aproximate root.
 
     
          Define variables

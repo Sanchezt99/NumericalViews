@@ -1,33 +1,19 @@
 import math
+import Funcions as fc
 
 from scitools.StringFunction import StringFunction
 from math import *
-
-
-class Function:
-    def __init__(self, input):
-        self.function = StringFunction(input)
-        self.input = input
-
-    def evaluate(self, value):
-        return self.function(value)
-
-    def evaluate2(self, value):
-        x = value
-        return eval(self.input)
-
 
 class Newton:
     def __init__(self):
         self.values = []
 
-    def evaluate(self, tol, xi, niter, fun, dfun, type_error=1):
+    def evaluate(self, tol, xi, niter, fun, dfun, type_error=0):
+        
+        print("Iter","xi", "f(xi)", "E")
 
-        fun = Function(fun)
-        dfun = Function(dfun)
-
-        fx = fun.evaluate2(xi)
-        dfx = dfun.evaluate2(xi)
+        fx = fun(xi)
+        dfx = dfun(xi)
 
         if fx == 0:
             return str(fx) + " is a root."
@@ -42,8 +28,10 @@ class Newton:
 
         while error > tol and fx != 0 and dfx != 0 and contador < niter:
             xn = xi - (fx/dfx)
-            fx = fun.evaluate2(xn)
-            dfx = dfun.evaluate2(xn)
+            fx = fun(xn)
+            dfx = dfun(xn)
+
+            print(contador, xi, fun(xi),error)
 
             if type_error == 0:
                 error = abs(xn-xi)
@@ -68,3 +56,6 @@ class Newton:
 
     def tabla_values(self):
         return self.values
+
+newt = Newton()
+print(newt.evaluate(1E-7,0.5,100,fc.f,fc.fPrime))

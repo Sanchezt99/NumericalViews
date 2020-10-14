@@ -1,3 +1,4 @@
+
 import math
 from scitools.StringFunction import StringFunction
 from math import *
@@ -47,13 +48,10 @@ class FixedPoint:
 
 
         if fx == 0:
-            print(f"{x0} is the root")
             return f"{x0} is the root"
         elif error < tolerancia:
-            print(f"{x0} is an aproximation with tolerance of {tolerancia} and after {contador} iterations")
-            return f"{x0} is an aproximation with tolerance of {tolerancia} "
+            return f"{x0} is an aproximation with tolerance of {tolerancia} and after {contador} iterations"
         else:
-            print(f"Failed after {iter} iterations")
             return f"Failed after {iter} iterations "
 
     def tabla_values(self):
@@ -61,4 +59,4 @@ class FixedPoint:
         return self.values
 
 fpoint = FixedPoint()
-fpoint.evaluate(-0.5, 1E-7, 100, fc.f1, fc.g)
+print(fpoint.evaluate(-0.5, 1E-7, 100, fc.f, fc.fPrime))

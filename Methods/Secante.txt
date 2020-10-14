@@ -25,5 +25,3 @@ Otherwise If Error <Tolerance Then
 Show: ‘‘ X1 ’is an approximate root with a tolerance‘ Tolerance ’’
 Otherwise If Den = 0 Then
 Show: 'There is possibly a multiple root'
-Chinese
-Show: 'Failure
