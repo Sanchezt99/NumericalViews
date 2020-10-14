@@ -1,4 +1,5 @@
 import Error as e
+import math as m
 
 def execute(f, tolerance, maxIterations):
 
@@ -20,4 +21,4 @@ def execute(f, tolerance, maxIterations):
 
 
 def acceleration(x, x1, x2):
-    return x2 - ((x2 - x1)^2)/(x - 2*x1 - x2)
+    return x2 - m.pow((x2 - x1), 2)/(x - 2*x1 - x2)

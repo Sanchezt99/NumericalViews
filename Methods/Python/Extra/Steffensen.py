@@ -1,5 +1,6 @@
 import Aikten as ak
 import Error as e
+import math as m
 
 def execute(f, tolerance, maxIterations, approximation):
 
@@ -17,3 +18,10 @@ def execute(f, tolerance, maxIterations, approximation):
         x3 = ak.acceleration(x0, x1, x2)
         i += 1
     return x3
+
+
+def fun(x):
+    return m.sqrt(10/(x+4))
+
+
+print(execute(fun, 1E-7, 100, 1.5))
