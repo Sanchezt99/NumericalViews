@@ -1,0 +1,757 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage[ruled,vlined]{algorithm2e} 
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{nopageno}
+\thispagestyle{empty}
+\usepackage{float}
+\usepackage{enumitem}
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{blindtext}
+%++++++++++++++++++++++++++++++++++++++++
+
+
+\begin{document}
+
+\title{EAFIT UNIVERSITY\\
+
+IT AND SYSTEMS DEPARTMENT \\
+
+CHOICE OF THE PROJECT \\
+
+
+Second report
+\date{}
+}
+
+\maketitle
+
+
+\textit{Objective: Implementation of the numerical methods seen until this point in the semester, including the additional ones.}\\
+
+\textbf{Course}: Numerical analysis.
+
+\textbf{Teacher}: Edwar Samir Posada Murillo.
+
+\textbf{Semester}: 2020-2.
+
+\textbf{Due date for the second report}:Tuesday October 13.
+
+\textbf{Project name}: Numerical views.
+
+\textbf{Project Repository}: \href{https://github.com/Sanchezt99/NumericalViews}{Link Repo} \\
+
+\textbf{Members}:\\
+
+Mariana Ramírez Duque (marami21@eafit.edu.co) \\
+
+Nicolás Roldán Ramírez (nroldanr@eafit.edu.co) \\
+
+Mateo Sánchez Toro (msanchezt@eafit.edu.co)\\
+
+Maria Cristina Castrillon (Mcastri6@eafit.edu.co) \\
+
+
+\textbf{Report description}:We will write the pseudocode of each method followed by an
+
+
+example execution. The code can be found on the repository link cited above
+
+\BlankLine
+\BlankLine
+\section{Methods:}
+
+\BlankLine
+\BlankLine
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{
+f: function to find root of, \\
+X0: first root approximation, \\ 
+Delta: delta(x),\\ 
+N: maximum number of iterations,\\ 
+}
+\BlankLine
+
+\uIf{(y=0) }{
+    x0 is root\;
+}
+\Else{
+$x1 \leftarrow [x0 \ delta]$\\
+$y1 \leftarrow [f(x1)]$\\
+$counter \leftarrow [1] $\\
+}
+
+\While{ $y1 * y0 > 0 \ and \ counter < n$ do}{
+    $x0 \leftarrow [x1]$\\
+	$y0 \leftarrow [y1]$\\
+	$x1 \leftarrow [x0 +delta]$\\
+	$y1 \leftarrow [f(x1)]$\\
+	$counter \leftarrow \ counter + 1 $\\
+}
+\uIf{(y1==0) }{
+    x1 is root\;
+}
+\Else{
+\uIf{($y1*y0 < 0)$ }{
+    [x0,x1] define an interval\;
+}
+\Else{
+    print("didn't find interval in N iterations")
+}
+}
+
+\caption{Incremental search}
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{
+xi: lower limit of the interval, \\
+xs: the upper range, \\
+f: function to find, \\
+N: maximum number of iterations,\\ 
+tol: tolerance, \\ 
+}
+\BlankLine
+$yi \leftarrow f(xi)$\\
+$ys \leftarrow f(xs)$\\
+
+\uIf{(yi==0)}{
+     print("xi is root")
+}
+\Else{
+\uIf{(ys==0) }{
+    print("xs is root")
+}
+}
+\Else{
+\uIf{($yi * ys > 0 )$ }{
+    print("Inappropriate range")
+}
+}
+\Else{
+    $xm \leftarrow (xi+xs)/2$\\
+	$ym \leftarrow f(xm)$\\
+	$error \leftarrow tol +1 $\\
+	$counter \leftarrow [1] $\\
+}
+
+\While{ $ym  f = 0 \ and \ (error > tol) and (contador < n$ do
+}
+    \uIf{($yi * ym > 0)$ }{
+	$xi \leftarrow xm, yi \leftarrow ym $\\}
+	\Else{
+	$xs \leftarrow xm, ys \leftarrow ym $\\
+	$xaux \leftarrow xm$\\
+	$xm \leftarrow xi + xs / 2$\\
+	$ym \leftarrow f(xm)$\\
+	$error \leftarrow xm-xaux $\\
+	$counter \leftarrow + 1 $\\
+}
+
+\uIf{($ym==0)$ }{
+    print("xm is root")
+}
+\Else{
+  \uIf{($ error < tol)$ }{
+     print("Xm  is root with an error equal to error")
+	}
+}
+\Else{
+    print("The method failed")
+}
+
+\caption{Bisection}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{
+a: lower limit of the interval, \\
+b: the upper range, \\
+f: function to find, \\
+N: maximum number of iterations,\\ 
+tol: tolerance, \\ 
+}
+\BlankLine
+$ya \leftarrow f(a)$\\
+$yb \leftarrow f(b)$\\
+
+\uIf{(ya==0)}{
+     print("a is root")
+}
+\Else{
+\uIf{(yb==0) }{
+    print("b is root")
+}
+}
+\Else{
+\uIf{($ya * yb > 0 )$ }{
+    print("Inappropriate range")
+}
+}
+\Else{
+    $p \leftarrow a-f(a)*(b-a)/f(b)- f(a)$\\
+	$yp \leftarrow f(p)$\\
+	$error \leftarrow tol +1 $\\
+	$counter \leftarrow [1] $\\
+}
+
+\While{ $yp  f = 0 \ and \ (error > tol) and (contador < n$ do
+}
+    \uIf{($ya * yp > 0 )$ }{
+	$a \leftarrow p, ya \leftarrow yp $\\}
+	\Else{
+	$b \leftarrow p, yb \leftarrow yp $\\
+	$paux \leftarrow p$\\
+	$p \leftarrow a-f(a)*(b-a)/f(b)- f(a)$\\
+	$yp\leftarrow f(p)$\\
+	$error \leftarrow p-paux $\\
+	$counter \leftarrow + 1 $\\
+}
+
+\uIf{($yp==0)$ }{
+    print("p is root")
+}
+\Else{
+  \uIf{($ error < tol)$ }{
+     print("p  is root with an error equal to error")
+	}
+}
+\Else{
+    print("The method failed")
+}
+
+\caption{False Rule}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{
+f: function to find root of, \\
+fprime: derivative of f, \\ 
+f2prime: second derivative of f,\\ 
+tol: error tolerance,\\ 
+N: maximum number of iterations,\\ 
+X0: first root approximation}
+\Output{root approximation x}
+\BlankLine
+x \leftarrow x0 \\
+fun \leftarrow(x) \\
+funprime \leftarrow fprime(x) \\
+fun2prime \leftarrow f2prime(x) \\
+error \leftarrow infinity \\
+\BlankLine
+
+\For{$i\leftarrow 0$ \KwTo $N$}{
+
+\uIf{ $error\ \leq \ tol$(i,i) = 0 }{
+    break;
+}
+error \leftarrow x
+x \leftarrow x0 \\
+fun \leftarrow f(x) \\
+funprime \leftarrow fprime(x) \\
+fun2prime \leftarrow f2prime(x) \\
+error \leftarrow infinity \\
+error \leftarrow abs(error - x)
+
+
+
+}
+\caption{Multiple roots}
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b}
+\Output{solution vector x}
+\BlankLine
+\uIf{(A is not square) or (size of A and size of b are not computable) }{
+    break \;
+}
+\uIf{ det(A) = 0 }{
+    break \;
+}
+$A \leftarrow [A \ b]$\\
+\For{$i\leftarrow 1$ \KwTo $n-1$}{
+
+\uIf{ $\Bar{A}$(i,i) = 0 }{
+    fund l such that $\Bar{A}$(l,i) $\neq$ 0 \;
+    swith $\Bar{A}$(i) and $\Bar{A}$(l)
+}
+
+
+\For{$j\leftarrow i+1$ \KwTo $n$}{\label{forins}
+
+    multiplier $M_{j,i} \leftarrow \frac{\Bar{A}(j,i)}{\Bar{A}(i,i)} $\\
+    $\bar{A}_{j} \leftarrow \bar{A}_{J} - M_{j,i} * \bar{A}_{i}$
+
+
+}
+
+}
+$x \leftarrow $ susreg($\bar(A)$)
+\caption{Gaussian elimination}
+\end{algorithm}\DecMargin{1em}
+
+
+
+\textbf{Gaussian Elimination with partial pivot}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{square n x n matrix A, n vector b}
+\Output{solution vector x}
+\BlankLine
+\uIf{ det(A) == 0 }{
+    break \;
+}
+\For{$i\leftarrow 1$ \KwTo $n-1$}{
+
+    champion $\leftarrow i $\\
+    \For{$j\leftarrow champion + 1$ \KwTo $n-1$}{
+        \uIf{abs($A$(j,i)) == abs($A$(champion,i))}{
+            champion $\leftarrow i$
+        }
+    }
+    Swap row in $A$(champion) with A$(i)$\\
+    Swap value in $b$(champion) with b$(i)$\\
+
+    \For{$j\leftarrow i+1$ \KwTo $n-1$}{
+        $multiplicand \leftarrow \frac{A(j,i)}{A(i,i)} $\\
+        $A_{j} \leftarrow A_{J} - M_{j,i} * A_{i}$
+    }
+}
+$x \leftarrow $ susreg($A$)
+
+\caption{Gaussian elimination with partial pivot}
+\end{algorithm}\DecMargin{1em}
+
+\textbf{Gaussian Elimination with total pivot}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{square n x n matrix A, n vector b}
+\Output{solution vector x}
+\BlankLine
+\uIf{ det(A) == 0 }{
+    break \;
+}
+posStamp \leftarrow [from 0 to n-1]
+\For{$i\leftarrow 1$ \KwTo $n-1$}{
+
+    row $\leftarrow i $\\
+    col $\leftarrow i $\\
+
+    \For{$j\leftarrow row$ \KwTo $n-1$}{
+        \For{$k\leftarrow col$ \KwTo $n-1$}{
+            \uIf{abs($A$(i,j)) == abs($A$(row,col))}{
+                row $\leftarrow i$
+                col $\leftarrow j$
+            }
+        }
+    }
+    \uIf{col != i} {
+        Swap column A(,col) with A(,i)
+        Swap value in posStamp(col) with posStamp(i)
+    }
+    \uIf{col != i} {
+        Swap row A(row) with A(i)
+        Swap value in b(row) with b(i)
+    }
+
+    \For{$j\leftarrow i+1$ \KwTo $n-1$}{
+        $multiplicand \leftarrow \frac{A(j,i)}{A(i,i)} $\\
+        $A_{j} \leftarrow A_{J} - M_{j,i} * A_{i}$
+    }
+}
+$x \leftarrow $ susreg(A)\\
+Sort x using posStamp
+
+\caption{Gaussian elimination with total pivot}
+\end{algorithm}\DecMargin{1em}
+
+
+\BlankLine
+\BlankLine
+
+\textbf{Fixed Point}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{f(x), g(x), x0, tol, N}
+\Output{The approximate root}
+\BlankLine
+         Define variables\\
+              int i = 0;\\
+              double x = 0;\\
+
+         Start While (AbsoluteValue (f (x))> = tol && i <= N)\\
+             x = g(x);\\
+             i ++;\\
+         End While\\
+
+         Start if (AbsoluteValue (f (x)) <1E-8) {\\
+             print "Root:" + x;\\
+         }\\
+         else {\\
+             print "Not possible to obtain root"\\
+         }\\
+         End if\\
+\caption{Fixed Point}
+\end{algorithm}\DecMargin{1em}
+
+
+\textbf{Secant}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{iter, xi, f(xi),E}
+\Output{The approximate root}
+\BlankLine
+I = f (Xo)\\
+If I = 0 Then\\
+Show: "Xo is Root"\\
+Y1 = f (X1)\\
+Counter = 0\\
+Error = Tolerance + 1\\
+
+While\\
+
+X2 = X1 - ((Y1 * (X1 Xo)) / Den)\\
+Error = Abs ((X2 - X1) / X2)\\
+Xo = X1\\
+I = Y1\\
+X1 = X2\\
+Y1 = f (X1)\\
+Counter = Counter + 1\\
+
+End while\\
+If Y1 = 0 Then\\
+Show: "X1 is Root"\\
+Otherwise If Error <Tolerance Then\\
+Show: ‘‘ X1 ’is an approximate root with a tolerance‘ Tolerance ’’\\
+Otherwise If Den = 0 Then\\
+Show: 'There is possibly a multiple root'\\
+\caption{Secant}
+\end{algorithm}\DecMargin{1em}
+
+\textbf{Newton}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{f(x), g(x), x0, tol, N}
+\Output{The approximate root}
+\BlankLine
+if fx == 0:\\
+             return the root\\
+     end if\\
+         if dfun == 0:\\
+             return Error, derivative cannot be 0.\\
+     end if\\
+     counter = 0\\
+     error = tolerance + 1\\
+
+         while error> tol and fx! = 0 and dfx! = 0 and counter <iterations:\\
+             xn = xi - (fx / dfx)\\
+             fx = fun.evaluate2 (xn)\\
+             dfx = dfun.evaluate2 (xn)\\
+         end while\\
+         if type_error == 0:\\
+                 error = | xn-xi |\\
+             else:\\
+                 error = | (xn-xi) / xn |\\
+         end if\\
+         xi = xn\\
+         counter +1\\
+         if fx == 0:\\
+             return xi is root\\
+         elif error <tol:\\
+             return xn is an approximation to a root with a tolerance "\\
+         elif dfx == 0:\\
+             return xn is a possible multiple root\\
+         else:\\
+             return The method failed in n iterations\\
+         end if\\
+\caption{Newton}
+\end{algorithm}\DecMargin{1em}
+
+
+\BlankLine
+\BlankLine
+
+
+\textbf{Extra method Aikten}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{function f, float tolerance, integer maxIterations}
+\Output{solution vector x}
+\BlankLine
+
+x \leftarrow f(1)\\
+x1 \leftarrow f(2)\\
+x2 \leftarrow f(3)\\
+
+$aikten1 \leftarrow 1$
+$aikten2 \leftarrow 0$
+
+\For{$i\leftarrow 1$ \KwTo maxIterations}{
+    \uIf{ abs(aikten1 - aikten0) <= tolerance }{
+    break \;
+    }
+
+    $aikten1 \leftarrow aikten2$
+    $aikten2 \leftarrow aiktkenEcuation(x, x1, x2)$
+
+    $x \leftarrow x1$
+    $x1 \leftarrow x2$
+    $x2 \leftarrow f(i+3)$
+
+}
+\caption{Extra method Aikten}
+\end{algorithm}\DecMargin{1em}
+
+
+\BlankLine
+\BlankLine
+
+\textbf{Extra method Steffensen}
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{function f, float tolerance, integer maxIterations, float approximation}
+\Output{root of f}
+\BlankLine
+
+$x0 \leftarrow approximation$\\
+x1 \leftarrow f(x0)\\
+x2 \leftarrow f(x1)\\
+x3 \leftarrow aiktkenEcuation(x0, x1, x2)\\
+
+\For{$i\leftarrow 1$ \KwTo maxIterations}{
+    \uIf{ abs(x0 - x3) <= tolerance }{
+        break \;
+    }
+
+    x0 \leftarrow x1\\
+    x1 \leftarrow x2\\
+    x2 \leftarrow f(i+3)\\
+    x3 \leftarrow aiktkenEcuation(x0, x1, x2)\\
+}
+x \leftarrow x3
+
+\caption{Extra method Steffensen}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}[H]
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{function f, root approximation 1 x0,root approximation 2 x1 , root approximation 3 x2, tolerance tol, Maximum number of iterations N}
+\Output{root approximation}
+\BlankLine
+
+$h1 = x1 - x0$ \\
+$h2 = x2 - x1$ \\
+$t1 = ( f(x1) - f(x0)) / h1$ \\
+$t2 = ( f(x2) - f(x1)) / h2$ \\ 
+$d = (t2 - t1) / (h2 + h1)$ \\ 
+
+
+\For{$i\leftarrow 3$ \KwTo $N$}{
+    $b = t2 + h2 * d$\\
+    $D = (b^2 - 4 *f (x2)  *d ) ^{1/2}$\\
+
+\uIf{$abs(b-D) < abs(b+D)$}{
+    $E = b + D$;\\
+}
+\Else{
+$E = b - D$\\
+}
+$h = (-2 * f(x2)) / E$\\
+$e = x$\\
+$x = x2 + h$\\
+$e =  abs(e - x)$\\
+
+\uIf{$abs(e) \leq tol)$}{
+    break;\\
+}
+
+$x0 = x1$\\
+$x1 = x2$\\
+$x2 = x$\\
+$h1 = x1 - x0$\\
+$h2 = x2 - x1$\\
+$t1 = (f(x1) - f(x0))/h1$\\
+$t2 = (f(x2) - f(x1))/h2$\\
+$d = (t2 - t1)/ (h2 + h1)$\\
+
+}
+\caption{Extra method Muller}
+\end{algorithm}\DecMargin{1em}
+
+
+\section{Pruebas}
+
+\textbf{Incremental search} \\
+
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/IncrementalSearches.PNG}
+  \caption{Proof of Incremental search}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+
+\textbf{Bisection} \\
+
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Bisection.PNG}
+  \caption{Proof of Bisection}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+\textbf{False Rule} \\
+
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/FalseRule.PNG}
+  \caption{Proof of False Rule}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+
+\textbf{Multiple roots} \\
+
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/mr.PNG}
+  \caption{Proof of Gaussian Elimination}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/partial.png}
+  \caption{Proof Partial Pivot}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/total.png}
+  \caption{Proof Total Pivot}
+  \label{fig:cond}
+\end{figure}
+
+\BlankLine
+
+
+\textbf{Gaussian Elimination}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/a.PNG}
+  \caption{Proof of Gaussian Elimination}
+  \label{fig:cond}
+\end{figure}
+
+\textbf{Muller Method}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/muller.PNG}
+  \caption{Proof of Muller Method}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+
+
+\textbf{Fixed Point}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/punto fijo.png}
+  \caption{Proof of Fixed Point}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Secant}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/secante.png}
+  \caption{Proof of Secant}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+
+\textbf{Newton}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Newton.png}
+  \caption{Proof of Newton}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\end{document}
