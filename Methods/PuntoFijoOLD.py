@@ -9,9 +9,9 @@ def g(x):
 
 p0=0
 
-tolerance=0.00001
+tolerance=1E-7
 
-n0=50
+n0=100
 
 i=1
 
