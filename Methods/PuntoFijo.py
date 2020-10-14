@@ -1,5 +1,5 @@
 import math
-from .Function import Function
+from . Function import Function
 
 class FixedPoint:
 
@@ -14,11 +14,11 @@ class FixedPoint:
         fx = fun.evaluate2(xi)
 
         if fx == 0:
-            return f"{xi} es raiz"
+            return f"{xi} is the root"
         if iter < 1:
-            return "El valor del iterador es incorrecto"
+            return "The iterator value is wrong"
         if tolerancia < 0:
-            return "Error en la tolerancia, debe ser mayor o igual a 0"
+            return "Tolerance error, must be greater than or equal to 0"
 
         self.values.append([0, str(xi), str("{:.2e}".format(fx)), None])
         contador = 0
@@ -39,11 +39,11 @@ class FixedPoint:
                 "{:.2e}".format(fi)), str("{:.2e}".format(error))])
 
         if fx == 0:
-            return f"{xi} es raiz"
+            return f"{xi} is the root"
         elif error < tolerancia:
-            return f"{xi} es una aprox. con una tolerancia = {tolerancia}"
+            return f"{xi} is an aproximation with tolerance of {tolerancia}"
         else:
-            return f"El método fracasó en {iter} iteraciones"
+            return f"Failed after {iter} iterations"
 
     def tabla_values(self):
         return self.values

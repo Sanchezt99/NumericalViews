@@ -1,5 +1,5 @@
 import math
-from .Function import Function
+from . Function import Function
 
 
 class Newton:
@@ -15,9 +15,9 @@ class Newton:
         dfx = dfun.evaluate2(xi)
 
         if fx == 0:
-            return str(fx) + " es una raiz."
+            return str(fx) + " is a root."
         if dfun == 0:
-            return "La derivada no puede ser 0"
+            return "The derivate can't be 0"
 
         contador = 0
         error = tol + 1
@@ -42,13 +42,13 @@ class Newton:
                 "{:.2e}".format(fx)), str(dfx), str("{:.2e}".format(error))])
 
         if fx == 0:
-            return f"{xi} es raiz"
+            return f"{xi} is a root"
         elif error < tol:
-            return f"{xn} es una aprox. a una raiz con una tolerancia = {tol}"
+            return f"{xn} its an aproximation to a root with a tolerance of {tol}"
         elif dfx == 0:
-            return f"{xn} es una posible raiz multiple"
+            return f"{xn} Possible multiple root"
         else:
-            return f"El método fracasó en {niter} iteraciones"
+            return f"Failed after {niter} iterations"
 
     def tabla_values(self):
         return self.values

@@ -1,25 +1,25 @@
-Inicio PuntoFijo
+Start Fixed Point
 
-    Recibir g(x)
+     Receive g (x)
 
-    Recibir f(x)
+     Receive f (x)
 
     
-        Definir variables
-             int i = 0;
-             double x = 0;
+         Define variables
+              int i = 0;
+              double x = 0;
 
-        Inicio While (ValorAbsoluto(f(x))>=1E-8 && i<=1000000) 
-            x = g(x);
-            i++;
-        Fin While
+         Start While (AbsoluteValue (f (x))> = 1E-8 && i <= 1000000)
+             x = g (x);
+             i ++;
+         End While
 
-        Inicio if(ValorAbsoluto(f(x)) < 1E-8){
-            print "Root: " + x;
-        }
-        else{
-            print "Not possible to obtain root"
-        }
-        Fin if
+         Start if (AbsoluteValue (f (x)) <1E-8) {
+             print "Root:" + x;
+         }
+         else {
+             print "Not possible to obtain root"
+         }
+         End if
 
-Fin
+End
