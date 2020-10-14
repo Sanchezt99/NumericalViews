@@ -33,4 +33,3 @@ There is a root of f in [ 41.5 , 42.0 ]
 There is a root of f in [ 43.0 , 43.5 ]
 There is a root of f in [ 44.5 , 45.0 ]
 There is a root of f in [ 46.0 , 46.5 ]
->>> 

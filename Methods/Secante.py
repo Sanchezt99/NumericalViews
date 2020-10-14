@@ -1,24 +1,5 @@
 import math
-<<<<<<< HEAD
 
-from scitools.StringFunction import StringFunction
-from math import *
-
-
-class Function:
-    def __init__(self, input):
-        self.function = StringFunction(input)
-        self.input = input
-
-    def evaluate(self, value):
-        return self.function(value)
-
-    def evaluate2(self, value):
-        x = value
-        return eval(self.input)
-=======
-from Function import Function
->>>>>>> bfad0b53de3eb2c3b37d63fbd73c631602ef7c2d
 
 class Secant:
     def __init__(self):
@@ -26,9 +7,7 @@ class Secant:
 
     def evaluate(self, tol, x0, x1, fun, niter, type_error=1):
 
-        fun = Function(fun)
 
-        fx0 = fun.evaluate(x0)
 
         if fx0 == 0:
             return f"{x0} is the root"

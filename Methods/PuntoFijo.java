@@ -1,5 +1,3 @@
-package puntofijo;
-
 public class PuntoFijo{
 
     public static double g(double x){
