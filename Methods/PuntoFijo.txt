@@ -9,7 +9,7 @@ Start Fixed Point
               int i = 0;
               double x = 0;
 
-         Start While (AbsoluteValue (f (x))> = 1E-8 && i <= 1000000)
+         Start While (AbsoluteValue (f (x))> = 1E-7 && i <= 1000000)
              x = g (x);
              i ++;
          End While
