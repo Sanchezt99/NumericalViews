@@ -5,8 +5,6 @@ import Errors.NoDimensionMatrix;
 import Errors.NotSquareMatrix;
 import Share.MatrixUtil;
 
-import java.util.Arrays;
-
 public class TotalPivot extends PartialPivot{
 
     private int[] positionStamp;
