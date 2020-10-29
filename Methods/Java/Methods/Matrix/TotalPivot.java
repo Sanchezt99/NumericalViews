@@ -22,9 +22,9 @@ public class TotalPivot extends PartialPivot{
 
         for (int i = row; i < matrix.length; ++i) {
             for (int j = col; j < matrix.length; ++j) {
-                if (Math.abs(matrix[i][j]) > Math.abs(matrix[row][col])) {
-                    row = i;
-                    col = j;
+                if (Math.abs(matrix[j][i]) > Math.abs(matrix[row][col])) {
+                    row = j;
+                    col = i;
                 }
             }
         }
@@ -36,6 +36,7 @@ public class TotalPivot extends PartialPivot{
             MatrixUtil.swapRows(matrix, row, index);
             MatrixUtil.swapValues(b, row, index);
         }
+        System.out.println(row + "," + col);
     }
 
     private void initPositionStamp(int length) {

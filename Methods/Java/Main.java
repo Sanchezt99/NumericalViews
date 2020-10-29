@@ -17,14 +17,13 @@ public class Main {
         PartialPivot partialPivot = new PartialPivot();
         TotalPivot totalPivot = new TotalPivot();
 
-        Gauss[] gausses = new Gauss[3];
-        gausses[0] = gauss;
-        gausses[1] = partialPivot;
-        gausses[2] = totalPivot;
+        Gauss[] gausses = new Gauss[1];
+        gausses[0] = totalPivot;
 
         Aikten aikten = new Aikten();
         Steffensen steffensen = new Steffensen();
 
+        /*
         double res = steffensen.execute(x -> {
             return Math.sqrt(10.0/(x+4));
         }, 1E-7, 100, 1.5);
@@ -36,25 +35,27 @@ public class Main {
         System.out.println("Steffensen " + res);
         System.out.println("Aikten " + res3);
 
+         */
+
 
         try {
             for (Gauss method : gausses) {
 
                 double[][] matrix = {
-                        {2, -1, 2},
-                        {1, 1, 1},
-                        {-1, 4, 1}
+                        {0, 0, 1},
+                        {4, 2, 1},
+                        {2.25, 1.5, 1}
                 };
 
-                double[] b = {4, 2, 3}; //Answers x = -0.5, y = 0, z = 2.5
+                double[] b = {0.5, 1, 0}; //Answers x = -0.5, y = 0, z = 2.5
 
 
-                System.out.print("\u001B[31m" + method + "\u001B[0m");
+                System.out.println("\u001B[31m" + method + "\u001B[0m");
 
-                long ini = System.currentTimeMillis();
+                //long ini = System.currentTimeMillis();
                 //double[] res2 = method.execute(TestFunction.getA(), TestFunction.getB(), true);
                 double[] res2 = method.execute(matrix, b, true);
-                System.out.println(System.currentTimeMillis() - ini);
+                //System.out.println(System.currentTimeMillis() - ini);
 
                 MatrixUtil.printArray(res2);
 
