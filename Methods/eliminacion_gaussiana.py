@@ -27,7 +27,7 @@ def eliminacion_gaussiana(a,b):
         return 0
     
     if np.linalg.det(a) == 0:
-        file1.write("El determinante de 0 debe ser diferente de 0")
+        file1.write("El determinante de A debe ser diferente de 0")
         file1.close()
         return 0
 
