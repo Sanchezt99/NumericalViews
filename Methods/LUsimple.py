@@ -59,9 +59,9 @@ def LU_simple(A,b):
     uz = np.concatenate((U,z), axis=1)
     print("Uz \n")
     print(uz)
-    # print("x")
-    # x = sustitucion_regresiva(uz)
-    # print(x)
+    print("x")
+    x = sustitucion_regresiva(uz)
+    print(x)
 
 A = np.array([
     [4,3, -2, 7],
