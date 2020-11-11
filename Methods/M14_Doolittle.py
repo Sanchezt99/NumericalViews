@@ -1,5 +1,3 @@
-MAX = 100
-
 def Doolittle(M, n):
 
 	lower = [[0 for x in range(n)] 
