@@ -58,4 +58,5 @@ class Newton:
         return self.values
 
 newt = Newton()
-print(newt.evaluate(1E-7,0.5,100,fc.f,fc.fPrime))
+print(newt.evaluate(0.00001,1,100,fc.fPrime,fc.fPrimePrime))
+
