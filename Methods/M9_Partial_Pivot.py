@@ -1,5 +1,5 @@
-import MatrixUtils as mu
-import Gauss as gs
+import Utils.MatrixUtils as mu
+import M8_Gauss as gs
 
 def gauss(matrix, b):
     for i in range(len(matrix)):
@@ -17,14 +17,16 @@ def pivot(matrix, index, b):
     for i in range(len(matrix)):
         if abs(matrix[i][index]) > abs(matrix[champion][index]):
             champion = i
-    mu.swapRows(matrix, champion, index)
-    mu.swapValues(b, champion, index)
+    if champion != index:    
+        mu.swapRows(matrix, champion, index)
+        mu.swapValues(b, champion, index)
 
 
-a = [   [ 2, -1, 2],
-        [ 1,  1, 1],
-        [-1,  4, 1]
+a = [   [ 2,  -1, 0, 3],
+        [ 1, 0.5, 3, 8],
+        [0,   13, -2, 11],
+        [14,   5, -2, 3]
     ]
 
-b = [4,2,3]
-print(gauss(a,b))
+b = [1,1,1,1]
+gauss(a,b)

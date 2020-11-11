@@ -1,5 +1,5 @@
 import math
-import Funcions as fc
+import Utils.Funcions as fc
 
 from scitools.StringFunction import StringFunction
 from math import *

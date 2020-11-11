@@ -1,4 +1,4 @@
-import Error as e
+import Utils.Error as e
 import math as m
 
 def execute(f, tolerance, maxIterations):

@@ -1,6 +1,6 @@
 import math
 
-import Funcions as fc
+import Utils.Funcions as fc
 
 class Secant:
     def __init__(self):

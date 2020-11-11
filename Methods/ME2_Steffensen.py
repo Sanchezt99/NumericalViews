@@ -1,9 +1,9 @@
-import Aikten as ak
-import Error as e
+import ME1_Aikten as ak
+import Utils.Error as e
 import math as m
 
-def execute(f, tolerance, maxIterations, approximation):
 
+def execute(f, tolerance, maxIterations, approximation):
 
     x0 = f(1)
     x1 = f(2)

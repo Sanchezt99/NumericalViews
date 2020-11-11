@@ -1,4 +1,4 @@
-import MatrixUtils as mu
+import Utils.MatrixUtils as mu
 from copy import copy
 
 def gauss(matrix, b):
@@ -49,3 +49,11 @@ def backwardSolve(left, xValues, right):
         newXValues.pop(len(xValues)-1)
         return backwardSolve(left=newLeft, xValues=newXValues, right=newRight)
 
+a = [   [ 2,  -1, 0, 3],
+        [ 1, 0.5, 3, 8],
+        [0,   13, -2, 11],
+        [14,   5, -2, 3]
+    ]
+
+b = [1,1,1,1]
+print(gauss(a,b))
