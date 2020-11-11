@@ -59,4 +59,4 @@ class FixedPoint:
         return self.values
 
 fpoint = FixedPoint()
-print(fpoint.evaluate(-0.5, 1E-7, 100, fc.f, fc.fPrime))
+print(fpoint.evaluate(-0.5, 1E-7, 100, fc.f, fc.e))
