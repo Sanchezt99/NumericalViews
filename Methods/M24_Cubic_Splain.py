@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sp
 
 
 def splain(x, y):
@@ -9,7 +10,6 @@ def splain(x, y):
     m = (dimension-len(y))
     b = np.append(y, np.zeros(m))
 
-    print(f'{len(matrix)} x {len(matrix[0])}')
 
     interpolation(x, matrix)
     continuity(x, matrix)
@@ -18,11 +18,24 @@ def splain(x, y):
     borderlineOne(x, matrix)
     borderlineTwo(x, matrix)
 
-    xact = np.linalg.solve(matrix, b)
-
     np.set_printoptions(formatter={'float': lambda x: "{0:0.5f}".format(x)})
-    print(matrix)
-    print(xact)
+
+    print('\033[96m')
+    print('Cubic tracers coefficients')
+    print('\033[0m')
+    xact = np.linalg.solve(matrix, b)
+    for i in range(0,len(matrix), 4):
+        expr = f'{float("{:.5f}".format(xact[i]))} <-> {float("{:.5f}".format(xact[i+1]))} <-> {float("{:.5f}".format(xact[i+2]))} <-> {float("{:.5f}".format(xact[i+3]))}'
+        print(expr)
+
+    print('\033[96m')
+    print('Cubic tracers')
+    print('\033[0m')
+    x = sp.symbols('x')
+    for i in range(0,len(matrix), 4):
+        expr = xact[i]*x*x*x + xact[i+1]*x*x + xact[i+2]*x + xact[i+3]
+        print(expr)
+    
 
 
 def interpolation(x, matrix):
@@ -109,7 +122,7 @@ def borderlineTwo(x, matrix):
     matrix[len(matrix)-1] = b
 
 
-x = np.array([0,1,2,3])
-y = np.array([5,1,1,0])
+x = np.array([-1,0,3,4])
+y = np.array([15.5,3,8,1])
 
 splain(x,y)

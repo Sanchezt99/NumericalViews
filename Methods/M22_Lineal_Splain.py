@@ -1,4 +1,5 @@
 import numpy as np
+import sympy as sp
 
 def splain(x, y):
     dimension = 2*len(x) - 2
@@ -7,16 +8,27 @@ def splain(x, y):
     m = (dimension-len(y))
     b = np.append(y, np.zeros(m))
 
-    print(f'{len(matrix)} x {len(matrix[0])}')
-
     interpolation(x, matrix)
     continuity(x, matrix)
 
-    #np.set_printoptions(formatter={'float': lambda x: "{0:0.1f}".format(x)})
-    xact = np.linalg.solve(matrix, b)
+    np.set_printoptions(formatter={'float': lambda x: "{0:0.5f}".format(x)})
 
-    print(matrix)
-    print(xact)
+    print('\033[96m')
+    print('Lineal tracers coefficients')
+    print('\033[0m')
+    xact = np.linalg.solve(matrix, b)
+    for i in range(0,len(matrix), 2):
+        expr = f'{float("{:.5f}".format(xact[i]))} <-> {float("{:.5f}".format(xact[i+1]))}'
+        print(expr)
+
+    print('\033[96m')
+    print('Lineal tracers')
+    print('\033[0m')
+    x = sp.symbols('x')
+    for i in range(0,len(matrix), 2):
+        expr = xact[i]*x + xact[i+1]
+        print(expr)
+
 
 
 def interpolation(x, matrix):
@@ -48,7 +60,8 @@ def continuity(x, matrix):
         i += 2
 
     
-x = np.array([0,1,2,3])
-y = np.array([5,1,1,0])
+
+x = np.array([-1,0,3,4])
+y = np.array([15.5,3,8,1])
 
 splain(x,y)
