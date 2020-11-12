@@ -1,0 +1,618 @@
+\documentclass[letterpaper,12pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage[ruled,vlined]{algorithm2e} 
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\usepackage{nopageno}
+\thispagestyle{empty}
+\usepackage{float}
+\usepackage{enumitem}
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{blindtext}
+%++++++++++++++++++++++++++++++++++++++++
+
+
+\begin{document}
+
+\title{EAFIT UNIVERSITY\\
+
+IT AND SYSTEMS DEPARTMENT \\
+
+FINAL PROJECT \\
+
+
+Third report
+\date{}
+}
+
+\maketitle
+
+
+\textit{Objective: Implementation of the second batch of numerical methods seen until this point in the semester, including the additional ones.}\\
+
+\textbf{Course}: Numerical analysis.
+
+\textbf{Teacher}: Edwar Samir Posada Murillo.
+
+\textbf{Semester}: 2020-2.
+
+\textbf{Due date for the Third report}:Wednesday November 11.
+
+\textbf{Project name}: Numerical views.
+
+\textbf{Project Repository}: \href{https://github.com/Sanchezt99/NumericalViews}{Link Repo} \\
+
+\textbf{Members}:\\
+
+Mariana Ramírez Duque (marami21@eafit.edu.co) \\
+
+Nicolás Roldán Ramírez (nroldanr@eafit.edu.co) \\
+
+Mateo Sánchez Toro (msanchezt@eafit.edu.co)\\
+
+Maria Cristina Castrillon (Mcastri6@eafit.edu.co) \\
+
+
+\textbf{Report description}:We will write the pseudocode of each method followed by an
+
+
+example execution. The code can be found on the repository link cited above
+
+\clearpage
+\section{Methods}
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Incremental search}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{
+f: function to find root of, \\
+X0: first root approximation, \\ 
+Delta: delta(x),\\ 
+N: maximum number of iterations,\\ 
+}
+\BlankLine
+
+\uIf{(y=0) }{
+    x0 is root\;
+}
+\Else{
+$x1 \leftarrow [x0 \ delta]$\\
+$y1 \leftarrow [f(x1)]$\\
+$counter \leftarrow [1] $\\
+}
+
+\While{ $y1 * y0 > 0 \ and \ counter < n$ do}{
+    $x0 \leftarrow [x1]$\\
+	$y0 \leftarrow [y1]$\\
+	$x1 \leftarrow [x0 +delta]$\\
+	$y1 \leftarrow [f(x1)]$\\
+	$counter \leftarrow \ counter + 1 $\\
+}
+\uIf{(y1==0) }{
+    x1 is root\;
+}
+\Else{
+\uIf{($y1*y0 < 0)$ }{
+    [x0,x1] define an interval\;
+}
+\Else{
+    print("didn't find interval in N iterations")
+}
+}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Extra method Muller}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{function f, root approximation 1 x0,root approximation 2 x1 , root approximation 3 x2, tolerance tol, Maximum number of iterations N}
+\Output{root approximation}
+\BlankLine
+
+$h1 = x1 - x0$ \\
+$h2 = x2 - x1$ \\
+$t1 = ( f(x1) - f(x0)) / h1$ \\
+$t2 = ( f(x2) - f(x1)) / h2$ \\ 
+$d = (t2 - t1) / (h2 + h1)$ \\ 
+
+
+\For{$i\leftarrow 3$ \KwTo $N$}{
+    $b = t2 + h2 * d$\\
+    $D = (b^2 - 4 *f (x2)  *d ) ^{1/2}$\\
+
+\uIf{$abs(b-D) < abs(b+D)$}{
+    $E = b + D$;\\
+}
+\Else{
+$E = b - D$\\
+}
+$h = (-2 * f(x2)) / E$\\
+$e = x$\\
+$x = x2 + h$\\
+$e =  abs(e - x)$\\
+
+\uIf{$abs(e) \leq tol)$}{
+    break;\\
+}
+
+$x0 = x1$\\
+$x1 = x2$\\
+$x2 = x$\\
+$h1 = x1 - x0$\\
+$h2 = x2 - x1$\\
+$t1 = (f(x1) - f(x0))/h1$\\
+$t2 = (f(x2) - f(x1))/h2$\\
+$d = (t2 - t1)/ (h2 + h1)$\\
+
+}
+\end{algorithm}\DecMargin{1em}
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Vandermonde}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{x, y}
+\Output{Polynomial coefficients, Vandermonde polynom}
+\BlankLine
+Repeat\\
+Repeat\\
+A(j,i)=X(j)**(n-i)\\
+until($ j < n)$\\
+until($ i < n)$\\
+print: (Reverse A)*y 
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Newton Divided difference}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{vector x0, x1, ...xn, vector values f(x0); a point to evaluate }
+\Output{Divided differences F0,0 ...Fn,n}
+\BlankLine
+Step 1 \\
+ \For{i=0,...,n}{
+ Set Fi,0= f(Xi)\\
+ }
+Step 2\\
+ \For{i=1,...,n}{
+     \For{j=1,2,....i}{
+        Set Fi,j= ((Fi,j-1) -(Fi-1,j-1))/(Xi-Xi-j)}{
+        End \;
+  }
+}
+Output (F0,0...,Fi,i,...Fn,n) \\
+STOP \\
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Lagrange}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{vector x0, x1, ...xn, vector values f(x0); a point to evaluate }
+\Output{P Lagrange polynomial P(x) evaluated at z}
+\BlankLine
+Step 1 \\
+Initialize variables. Set P z equal zero. Set n to the number of pairs of points (x, y). Set
+L to be the all ones vector of length n\\
+Step 2\\
+ \For{i=1,2,....n}{
+    Step 3\\
+        \For{j=1,2,....i}{
+        Step 4\\
+        \uIf{ i = j then Li=(z-Xj)/(Xi-Xj)*Li }{
+        break \;
+            }
+       Step 5\\ 
+ }
+ }
+       Pz= ($Li * yi + Pz)$)\\
+Step 6 Output Pz. 
+STOP \\
+
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Neville}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{Numbers x0, x1, ...xn, values f(x0),f(x1)...f(xn)}
+\Output{the table Q with p(x)=Qn,n}
+\BlankLine
+Step 1 \\
+ \For{i=1,2,....n}{
+        \For{j=1,2,....i}{
+         }
+    }
+Set Q(ij)=((x-xi-j)Qi,j-1 - (x-xi)Qi-1,j-1 )/(xi-xi-j)\\
+Step 2\\
+Output(Q);\\
+STOP \\
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}
+\caption{Simple LU}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b}
+\Output{solution vector x}
+\BlankLine
+
+\uIf{(A is not square) or (size of A and size of b are not computable) }{
+    break \;
+}
+\uIf{ det(A) = 0 }{
+    break \;
+}
+$A \leftarrow L  U $\\
+$z \leftarrow \ progresiveSustitution([L \ b]) $\\
+$x \leftarrow \ RegressiveSustitution([U \  z]) $\\
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{Partial Pivoting LU}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b}
+\Output{solution vector x}
+\BlankLine
+
+\uIf{(A is not square) or (size of A and size of b are not computable) }{
+    break \;
+}
+\uIf{ det(A) = 0 }{
+    break \;
+}
+$P A \leftarrow L  U $\\
+$z \leftarrow \ progresiveSustitution( [L \ \ P*b] ) $\\
+$x \leftarrow \ RegressiveSustitution( [U  \ z] ) $\\
+
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{SOR}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b, initial aproximation X0, weighing factor w, tolerance, maximum interations Nmax}
+\Output{solution vector x, final number of iterations iter, error err}
+\BlankLine
+
+$A \leftarrow D - L - U$\\
+$T \leftarrow (D-w*L)^{-1} * ((1-w)*D+w * U)$\\
+$C \leftarrow w*(D-w*L)^{-1} * b$\\
+
+$xant \leftarrow x0$ \\
+$count \leftarrow $ 0 \\
+$error = 100$\\
+
+
+\While{ $error > tolerance \ and \ counter < nmax$ }{
+    $xact=T*xant+C$ \\
+    $error=norm(xant-xact)$ \\
+    $xant=xact$;\\
+    $cont=cont+1$;\\
+}
+$x=xact$\\
+$iter=cont$\\
+$err=error$\\
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{Gauss-Seidel}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b, initial aproximation X0, weighing factor w, tolerance, maximum interations Nmax}
+\Output{solution vector x, final number of iterations iter, error err}
+\BlankLine
+
+$A \leftarrow D - L - U$\\
+$T \leftarrow (D-L)^{-1} * U)$\\
+$C \leftarrow (D-L)^{-1} * b)$\\
+
+$xant \leftarrow x0$ \\
+$count \leftarrow $ 0 \\
+$error = 100$\\
+
+
+\While{ $error > tolerance \ and \ counter < nmax$ }{
+    $xact=T*xant+C$ \\
+    $error=norm(xant-xact)$ \\
+    $xant=xact$;\\
+    $cont=cont+1$;\\
+}
+$x=xact$\\
+$iter=cont$\\
+$err=error$\\
+\end{algorithm}\DecMargin{1em}
+
+
+
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{Jacobi}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b, initial aproximation X0, weighing factor w, tolerance, maximum interations Nmax}
+\Output{solution vector x, final number of iterations iter, error err}
+\BlankLine
+
+$A \leftarrow D - L - U$\\
+$T \leftarrow (D)^{-1} *(L+U)$\\
+$C \leftarrow (D)^{-1} * b$\\
+
+$xant \leftarrow x0$ \\
+$count \leftarrow $ 0 \\
+$error = 100$\\
+
+
+\While{ $error > tolerance \ and \ counter < nmax$ }{
+    $xact=T*xant+C$ \\
+    $error=norm(xant-xact)$ \\
+    $xant=xact$;\\
+    $cont=cont+1$;\\
+}
+$x=xact$\\
+$iter=cont$\\
+$err=error$\\
+\end{algorithm}\DecMargin{1em}
+
+
+\textbf{}
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{Crout}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b}
+\Output{solution vector x}
+\BlankLine
+
+$L \leftarrow I(n) $\\
+$U \leftarrow I(n) $\\
+
+\For{$i\leftarrow 1$ \KwTo $n-1$}{
+
+
+\For{$j\leftarrow i$ \KwTo $n$}{\label{forins}
+
+    ${L}_{j,i} \leftarrow {A}_{j,i} - dot(L(j,1:i-1), U(1:i-1,i)')$
+
+}
+\For{$j\leftarrow i+1$ \KwTo $n$}{\label{forins}
+
+    ${U}_{i,j} \leftarrow {A}_{i,j} - dot(L(i,1:i-1), U(1:i-1,j)')$ \\
+
+}
+
+}
+
+$L[n,n] = A[n,n]-dot(L[n,1:n-1],U[1:n-1,n]');$ \\
+$z=progresiveSustitution([L \ b]);$\\
+$x=regresiveSustitution([U \ z]); $
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+
+\IncMargin{1em}
+\begin{algorithm}   
+\caption{Cholesky}
+\SetKwData{Left}{left}\SetKwData{This}{this}\SetKwData{Up}{up}
+\SetKwFunction{Union}{Union}\SetKwFunction{FindCompress}{FindCompress}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{nxn matrix A, column vector b, initial approximation X0, weighing factor w, tolerance, maximum iterations Nmax}
+\Output{solution vector x}
+
+$L \leftarrow I(n) $\\
+$U \leftarrow I(n) $\\
+
+\For{$i\leftarrow 1$ \KwTo $n-1$}{
+    ${L}_{i,i} \leftarrow \sqrt{{A}_{i,i} - dot(L(i,1:i-1), U(1:i-1,i)') }$\\
+    ${U}_{i,i} \leftarrow  {L}_{i,i}$\\
+    \For{$j\leftarrow i+1$ \KwTo $n$}
+        $L[j,i]=(A[j,i]-dot(L[j,1:i-1],U[1:i-1,i]'))/U(i,i);$\\
+        $U[i,j]=(A[i,j]-dot(L[i,1:i-1],U[1:i-1,j]'))/L[i,i];$
+}
+$L[n,n] = A[n,n]-dot(L[n,1:n-1],U[1:n-1,n]');$\\
+$z=progressiveSustitution([L  b]);$\\
+$x=regressiveSustitution([U  z]); $
+\end{algorithm}\DecMargin{1em}
+
+
+
+
+\section{Evidence}
+
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/IncrementalSearches.PNG}
+  \caption{Proof of Incremental search}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Muller Method}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/muller.PNG}
+  \caption{Proof of Muller Method}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Doolitle}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Doolitle.jpg}
+  \caption{Proof of Doolitle}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Jacobi}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Jacobi.jpg}
+  \caption{Proof of Jacobi}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+
+\textbf{Vandermonde}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Vandermonde.png}
+  \caption{Proof of Vandermonde}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Newton Divided Difference}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/NewtonDividedDifference.png}
+  \caption{Proof of Newton Divided Difference}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Lagrange}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Lagrange.png}
+  \caption{Proof of Lagrange}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Spline Linear}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/SplineLinear.jpg}
+  \caption{Proof of Spline Linear}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Spline Square}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/SplineSquare.jpg}
+  \caption{Proof of Spline Square}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Spline Cubic}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/SplineCubic.jpg}
+  \caption{Proof of Spline Cubic}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+
+\textbf{Neville}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/Neville.png}
+  \caption{Proof of Neville}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{LU Simple}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/2n.PNG}
+  \caption{Proof of LU Simple}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{LU Partial Pivot}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/lupv1.PNG}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/lupv2.PNG}
+  \caption{Proof of LU Partial Pivot}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{SOR}
+
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/SOR.PNG}
+  \caption{Proof of SOR}
+  \label{fig:cond}
+\end{figure}
+\textbf{\textbf{\textbf{}}}
+
+\textbf{Cholesky}
+\begin{figure}[H]
+  \includegraphics[width=\linewidth]{Fotos/cholesky.PNG}
+  \caption{Proof of Cholesky}
+  \label{fig:cond}
+\end{figure}
+\end{document}
+
