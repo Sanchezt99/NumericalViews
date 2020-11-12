@@ -1,13 +1,13 @@
-def seidel(a, x ,b): 
+def GaussSeidel(a, x ,b): 
 	n = len(a)				 
 	for j in range(0, n):		 
-		d = b[j]				 
+		temp = b[j]				 
 		
 		for i in range(0, n):	 
 			if(j != i): 
-				d-=a[j][i] * x[i] 
+				temp-=a[j][i] * x[i] 
 
-		x[j] = d / a[j][j] 
+		x[j] = temp / a[j][j] 
 		 
 	return x	 
 				 
@@ -22,5 +22,5 @@ print(x)
 
 
 for i in range(0, 25):			 
-	x = seidel(a, x, b) 
+	x = GaussSeidel(a, x, b) 
 	print(x)					 
