@@ -10,17 +10,18 @@ def GaussSeidel(a, x ,b):
 		x[j] = temp / a[j][j] 
 		 
 	return x	 
+	#implementar error		 
+n = 4								 
 				 
-n = 3							
-a = []							 
-b = []		 
-				 
-x = [0, 0, 0]						 
-a = [[6, 2, 1],[3, 7, 2],[6, 1, 3]] 
-b = [3,2,7] 
+x = [0,0,0,0]						 
+a = [[4, -1, 0,3],
+	[1,15.5,3,8],
+	[0,-1.3,-4,1.1],
+	[14,5,-2,30]] 
+b = [1,1,1,1] 
 print(x) 
 
 
-for i in range(0, 25):			 
+for i in range(0, 31):			 
 	x = GaussSeidel(a, x, b) 
-	print(x)					 
+	print(i,x)					 

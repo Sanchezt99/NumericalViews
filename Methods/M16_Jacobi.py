@@ -1,9 +1,10 @@
-
-x0, y0, z0 = 0
+#NOTE: NOT FINAL VERSION, NEEDS FIXES.
+x0 = 0 
+y0 = 0 
+z0 = 0
 
 i = 1
 
-#falta hacer que se cambie a diagonal dominante automaticamente pero no se como.
 f1 = lambda x,y,z: (8-y+6*z)/10
 f2 = lambda x,y,z: (-18-3*x+z)/10
 f3 = lambda x,y,z: (25-2*x+3*y)/10
