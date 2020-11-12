@@ -25,6 +25,9 @@ def LU(A):
             if A[fila, etapa] != 0:
                 L[fila,etapa] = A[fila,etapa]/ A[etapa,etapa]
                 multiplicador = A[fila, etapa]/A[etapa,etapa]
+                uno = (A[fila,etapa::])
+                dos = A[etapa,etapa::]
+                tres = ((A[fila, etapa] / A[etapa, etapa]) * A[etapa, etapa::])
                 A[fila,etapa::] = (A[fila,etapa::] -((A[fila, etapa]/A[etapa,etapa]) * A[etapa,etapa::]))
 
         U[etapa, etapa:n+1] = A[etapa,etapa:n+1]
@@ -61,7 +64,7 @@ def LU_simple(A,b):
     print(x)
 
 A = np.array([
-    [4,3, -2, 7],
+    [4,3, -2, -7],
     [3,12,8,-3],
     [2,3,-9,3],
     [1,-2,-5,6]])
