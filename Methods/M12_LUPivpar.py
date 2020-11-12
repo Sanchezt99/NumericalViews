@@ -40,7 +40,7 @@ def LU(A):
                 multiplicador = A[fila, etapa]/A[etapa,etapa]
                 A[fila,etapa::] = (A[fila,etapa::] -((A[fila, etapa]/A[etapa,etapa]) * A[etapa,etapa::]))
 
-        print("\n L: \n")
+        print(" L: ")
         np.savetxt(sys.stdout, L, fmt="%8.3f")
 
 
@@ -48,13 +48,13 @@ def LU(A):
         U[etapa+1,etapa+1:n+1] = A[etapa+1, etapa+1:n+1]
         U[-1,-1] = A[-1,-1]
 
-        print("\n A: \n")
+        print(" A: ")
         np.savetxt(sys.stdout, A, fmt="%8.3f")
-        print("\n P: \n")
+        print(" P: ")
         np.savetxt(sys.stdout, P, fmt="%8.3f")
-        print("\n L: \n")
+        print(" L: ")
         np.savetxt(sys.stdout, L, fmt="%8.3f")
-        print("\n U: \n")
+        print(" U: ")
         np.savetxt(sys.stdout, U, fmt="%8.3f")
 
 
