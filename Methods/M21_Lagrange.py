@@ -5,7 +5,7 @@ x=[]
 y=[]
 n=0
 
-n=int(input("Enter the number of data to use: "))
+n=int(input("Enter the number of data to use:"))
 for i in range(n):
     xi=float(input("Enter the value of Xi "))
     x.append(xi)
@@ -13,8 +13,10 @@ for i in range(n):
     y.append(yi)
 L=0
 xx = symbols('x')
+#x7=x[7]
+#print(x7)
 
-
+print("Lagrange interpolating polynomials:")
 for i in range(len(x)):    
     l=1    
     for j in range(len(y)):
@@ -22,8 +24,11 @@ for i in range(len(x)):
             l=l*((xx-x[j])/(x[i]-x[j]))
     #print(j,"|",l)
     ll = expand(l)
-    print('Lagrange interpolating polynomials: ')
     print("L"+str(i), ll)
-    
-    for i in range(len(x)): 
-           print(str(y[i])+" L"+str(i)+" ",end='')
+    #print(i,l)
+
+print("Lagrange polynom")
+for i in range(len(x)): 
+    print(str(y[i])+"*L"+str(i),end='')
+    if i<len(x)-1:
+         print("+",end='')

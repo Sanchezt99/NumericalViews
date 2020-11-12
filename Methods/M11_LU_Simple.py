@@ -25,9 +25,6 @@ def LU(A):
             if A[fila, etapa] != 0:
                 L[fila,etapa] = A[fila,etapa]/ A[etapa,etapa]
                 multiplicador = A[fila, etapa]/A[etapa,etapa]
-                uno = (A[fila,etapa::])
-                dos = A[etapa,etapa::]
-                tres = ((A[fila, etapa] / A[etapa, etapa]) * A[etapa, etapa::])
                 A[fila,etapa::] = (A[fila,etapa::] -((A[fila, etapa]/A[etapa,etapa]) * A[etapa,etapa::]))
 
         U[etapa, etapa:n+1] = A[etapa,etapa:n+1]

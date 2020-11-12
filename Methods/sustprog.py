@@ -28,7 +28,7 @@ def reg_sust(ab):
         x[0,i] = np.dot(aux,aux1)/ab[i,i]
 
     return x
-        
+
 
 
 
