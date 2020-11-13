@@ -122,7 +122,7 @@ def borderlineTwo(x, matrix):
     matrix[len(matrix)-1] = b
 
 
-x = np.array([-1,0,3,4])
-y = np.array([15.5,3,8,1])
+x = np.array([-1,0,1,2])
+y = np.array([1,1,2,10])
 
 splain(x,y)

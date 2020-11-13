@@ -1,5 +1,7 @@
+import numpy as np
+
 def swapRows(matrix, row1, row2):
-    temp         = matrix[row2]
+    temp         = np.copy(matrix[row2])
     matrix[row2] = matrix[row1]
     matrix[row1] = temp
 
