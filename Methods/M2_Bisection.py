@@ -1,3 +1,4 @@
+  
 from math import *
 print ("Enter the lower limit of the interval:")
 a = float(input())
@@ -28,10 +29,10 @@ def funm():
 
 
 if fun1 == 0:
-    print (a,"es raiz")
+    print (a,"is root")
 else:
     if fun2==0:
-        print (b,"es raiz")
+        print (b,"is root")
     else:
         if (fun1()*fun2())>0:
             print ("inappropriate interval")
@@ -62,9 +63,9 @@ else:
                 print ("|","{:5.1f}".format(cont),"|","{:14.11f}".format(a),"|","{:14.11f}".format(c),"|","{:14.11f}".format(b),"|","{:14.11f}".format(fm),"|","{:14.11f}".format(error),"|")
                 cont = cont + 1
             if funm() == 0:
-                    print ("\n\n",c,"es raiz")
+                    print ("\n\n",c,"is root")
             else:
                     if error < tol:
-                            print ("\n\n",c,"es raiz con tol:",error)
+                            print ("\n\n",c,"is root with tol:",error)
                     else:
-                            print ("fracaso")
+                            print ("failed")
