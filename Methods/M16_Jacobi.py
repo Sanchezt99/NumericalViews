@@ -1,38 +1,53 @@
-#NOTE: NOT FINAL VERSION, NEEDS FIXES.
-x0 = 0 
-y0 = 0 
-z0 = 0
-
-i = 1
-
-f1 = lambda x,y,z: (8-y+6*z)/10
-f2 = lambda x,y,z: (-18-3*x+z)/10
-f3 = lambda x,y,z: (25-2*x+3*y)/10
+from numpy import array, diag, diagflat, dot
+import  numpy as np
+from numpy.linalg import inv
 
 
 
-# Reading tolerable error
-e = float(input('Enter tolerance (1e-n): '))
+class Jacobii:
 
-# Implementation of Jacobi Iteration
-print('\nCount\tx\ty\tz\n')
+    def __init__(self,mat, b, n, error, itera):
+        self.mat=mat
+        self.b = b
+        self.n = n
+        self.error = error
+        self.itera = itera
 
-condition = True
 
-while condition:
-    x1 = f1(x0,y0,z0)
-    y1 = f2(x0,y0,z0)
-    z1 = f3(x0,y0,z0)
-    print('%d\t%0.4f\t%0.4f\t%0.4f\n' %(i, x1,y1,z1))
-    e1 = abs(x0-x1)
-    e2 = abs(y0-y1)
-    e3 = abs(z0-z1)
-    
-    i += 1
-    x0 = x1
-    y0 = y1
-    z0 = z1
-    
-    condition = e1>e and e2>e and e3>e
 
-print('\nSolution: x=%0.3f, y=%0.3f and z = %0.3f\n'% (x1,y1,z1))
+    def Jac(self):
+        p = ""
+        mat=self.mat.replace("[","")
+        mat=mat.replace("]","")
+        mat=mat.split(",")
+        mat = np.array(mat)        
+        mat = mat.astype(np.float)
+        err = float(self.error)
+        iterat = int(self.itera)
+        n = int(self.n)
+        mat = mat.reshape(n, n)
+
+        b = self.b.split(",")
+
+        for i in range(len(b)):
+            b[i] = float(b[i])
+
+        #A=array([[45.,-3.,-7.,8.],[-12.,36.,9.,-5.],[-6.,4.,57.,-8],[-3.,-5.,-10.,78.]])
+        #b=array([1000.,-50.,300.,53.])
+        guess=array([0.,0.,0.,0.])
+
+        U=np.triu(mat,1)
+        L=np.tril(mat,-1)
+        D=diagflat(diag(mat))
+        invD=inv(D)
+        minLminU=-L-U
+        
+        for i in range(iterat):
+            minLminUdotXplusB=dot(minLminU, guess) + b
+            guess = dot(invD, minLminUdotXplusB)
+            p+= str(i+1)+ " " +str(np.round(guess, 5))+"\n"
+            e=np.linalg.norm(mat@guess-b)
+            if e<err:
+                break
+
+        return p

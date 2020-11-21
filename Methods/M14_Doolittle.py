@@ -1,50 +1,69 @@
-#NOTE: NEED FIXES TO WORK AS INTENDED
 import numpy as np
-import sustprog as sus
+import utiles
+from tabulate import tabulate
+class Doolittlee:
+    #[[45,-3,-7,8,100],[-12,36,9,-5,-50],[-6,4,57,-8,300],[-3,-5,-10,78,53]]
+    #1,1.5,5;2,3.7,13
+    def __init__(self,mat):
 
-def Doolittle(M, n):
-
-	print('Stage 0')
-	print(M)
-	#size n*n
-	LT = np.array([[0 for x in range(n)] 
-				for y in range(n)])
-	UT = np.array([[0 for x in range(n)] 
-				for y in range(n)])
-
-	#decomp
-	for i in range(n):
-		for k in range(i, n): 
-			sum = 0
-			for j in range(i):
-				sum += (LT[i][j] * UT[j][k])
-
-			UT[i][k] = M[i][k] - sum
-
-		for k in range(i, n):
-			if (i == k):
-				LT[i][i] = 1
-			else:
-				sum = 0
-				for j in range(i):
-					sum += (LT[k][j] * UT[j][i])
-				LT[k][i] = int((M[k][i] - sum) /
-									UT[i][i])
+        self.mat=mat
 
 
-	print('LT')
-	print(LT)
-		
-	print('UT')
-	print(UT)
+    def doolittle(self):
+        pr=""
+        mat=self.mat.replace("[","")
+        mat=mat.replace("]","")
+        mat=mat.split(",")
+        mat = np.array(mat)        
+        mat = mat.astype(np.float)
+        print(mat)
+        if len(mat) ==6:
+            mat=mat.reshape(2,3)
+        elif len(mat) ==12:
+            mat = mat.reshape(3,4)
+        elif len(mat) ==20:
+            mat = mat.reshape(4,5)
+        elif len(mat) ==30:
+            mat = mat.reshape(5,6)
+        elif len(mat) ==42:
+            mat = mat.reshape(6,7)
 
 
+        l=np.zeros((len(mat),len(mat[0])))
+        u=np.zeros((len(mat),len(mat[0])))
+        for k in range(len(mat)):
+            sum1=0
+            for p in range(k):
+                sum1+= l[k][p]*u[p][k]
+            u[k][k]= mat[k][k]-sum1
+            for i in range(k,len(mat)):
+                sum2=0
+                for p in range(k):
+                    sum2+=l[i][p]*u[p][k]
+                l[i][k]=(mat[i][k]-sum2)/u[k][k]
+            for j in range(k+1,len(mat)):
+                sum3=0
+                for p in range(k):
+                    sum3+=l[k][p]*u[p][j]
+                u[k][j]=(mat[k][j]-sum3)/(l[k][k])
 
+        for x in range(len(mat)):
+            l[x][len(mat[0])-1]=mat[x][len(mat[0])-1]
+        zx=utiles.suslu(l)
+        for x in range(len(mat)):
+            u[x][len(l[0])-1]=zx[x]
 
-M = np.array([[4, -1, 0,3],
-	[1,15.5,3,8],
-	[0,-1.3,-4,1.1],
-	[14,5,-2,30]])
+        pr+= "                  MATRIZ L:\n"
+        pr+= (tabulate(l, stralign='decimal'))
+        pr+= "\n"
+        pr+= "                  MATRIZ U:\n"
+        pr+= (tabulate(u, stralign='decimal'))
+        pr+= "\n"
+        pr+= "|        ZX1        |      ZX2         |         ZX3         |       ZX4        |\n"
+        pr+= str(utiles.susre(l))+"\n"
+        pr+= "|         X1        |       X2         |          X3         |        X4        |\n"
+        pr+=  str(utiles.susre(u))
+        pr+= "\n"
 
-Doolittle(M, 4)
+        return pr
 

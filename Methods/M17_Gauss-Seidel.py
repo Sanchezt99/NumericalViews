@@ -1,27 +1,44 @@
-def GaussSeidel(a, x ,b): 
-	n = len(a)				 
-	for j in range(0, n):		 
-		temp = b[j]				 
-		
-		for i in range(0, n):	 
-			if(j != i): 
-				temp-=a[j][i] * x[i] 
+import  numpy as np
 
-		x[j] = temp / a[j][j] 
-		 
-	return x	 
-	#implementar error		 
-n = 4								 
-				 
-x = [0,0,0,0]						 
-a = [[4, -1, 0,3],
-	[1,15.5,3,8],
-	[0,-1.3,-4,1.1],
-	[14,5,-2,30]] 
-b = [1,1,1,1] 
-print(x) 
+class GaussSeidel:
 
+    def __init__(self,mat, b, n, error, itera):
+        self.mat=mat
+        self.b = b
+        self.n = n
+        self.error = error
+        self.itera = itera
 
-for i in range(0, 31):			 
-	x = GaussSeidel(a, x, b) 
-	print(i,x)					 
+#A=np.array([[15,-7,2],
+#            [-4,20,-16],
+#            [13,-4,45],])
+#b=np.array([5.,34.,-23.])
+
+    def GaussS(self):
+        mat=self.mat.replace("[","")
+        mat=mat.replace("]","")
+        mat=mat.split(",")
+        mat = np.array(mat)        
+        mat = mat.astype(np.float)
+        err = float(self.error)
+        iterat = int(self.itera)
+        n = int(self.n)
+        mat = mat.reshape(n, n)
+
+        b = self.b.split(",")
+
+        for i in range(len(b)):
+            b[i] = float(b[i])
+
+        x=np.zeros_like(b)
+
+        for k in range(iterat):
+            for i in range(len(b)):
+                x[i]=(b[i]-np.sum(mat[i][:i]*x[:i])-np.sum(mat[i][i+1:]*x[i+1:]))/mat[i][i]
+
+            e=np.linalg.norm(mat@x-b)
+            print(k,x,e)
+            if e<err:
+                break
+
+        return x	 
