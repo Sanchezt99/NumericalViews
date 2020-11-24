@@ -2,6 +2,10 @@ import numpy as np
 import sympy as sp
 
 def splain(x, y):
+
+    x = np.array(x)
+    y = np.array(y)
+
     dimension = 2*len(x) - 2
 
     matrix = np.zeros((dimension, dimension))
@@ -27,7 +31,8 @@ def splain(x, y):
     x = sp.symbols('x')
     for i in range(0,len(matrix), 2):
         expr = xact[i]*x + xact[i+1]
-        print(expr)
+        str = sp.latex(expr)
+        print(str)
 
 
 
@@ -58,10 +63,3 @@ def continuity(x, matrix):
         matrix[j][i+3] = -1
         xn += 1
         i += 2
-
-    
-
-x = np.array([-1,0,3,4])
-y = np.array([15.5,3,8,1])
-
-splain(x,y)

@@ -1,9 +1,7 @@
 import numpy as np
 
 def swapRows(matrix, row1, row2):
-    temp         = np.copy(matrix[row2])
-    matrix[row2] = matrix[row1]
-    matrix[row1] = temp
+    matrix[row1], matrix[row2] = np.copy(matrix[row2]), np.copy(matrix[row1])
 
 def swapValues(array, index1, index2):
         temp          = array[index1]
@@ -12,5 +10,16 @@ def swapValues(array, index1, index2):
 
 
 def swapCols(matrix, col1, col2):
-    for i in range(len(matrix)):
-        matrix[i][col1], matrix[i][col2] = matrix[i][col2], matrix[i][col1]
+    matrix[:,col1], matrix[:,col2] = np.copy(matrix[:,col2]), np.copy(matrix[:,col1]) 
+
+
+def printMatrix(matrix, b):
+    m = np.copy(matrix)
+    cont = 0
+    for i in m:
+        print('[' ,end='')
+        for j in i:
+            print(j, " ", end= '')
+        print(b[cont], " ", end= '')
+        cont += 1
+        print(']')

@@ -34,7 +34,8 @@ def splain(x, y):
     x = sp.symbols('x')
     for i in range(0,len(matrix), 4):
         expr = xact[i]*x*x*x + xact[i+1]*x*x + xact[i+2]*x + xact[i+3]
-        print(expr)
+        str = sp.pretty(expr)
+        print(str)
     
 
 
