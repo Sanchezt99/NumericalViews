@@ -1,34 +1,29 @@
 import sympy as sp
 from sympy import *
 
-x=[]
-y=[]
-n=0
 
-n=int(input("Enter the number of data to use:"))
-for i in range(n):
-    xi=float(input("Enter the value of Xi "))
-    x.append(xi)
-    yi=float(input("Enter the value of Yi "))
-    y.append(yi)
-L=0
-xx = symbols('x')
-#x7=x[7]
-#print(x7)
 
-print("Lagrange interpolating polynomials:")
-for i in range(len(x)):    
-    l=1    
-    for j in range(len(y)):
-        if i!=j :
-            l=l*((xx-x[j])/(x[i]-x[j]))
-    #print(j,"|",l)
-    ll = expand(l)
-    print("L"+str(i), ll)
-    #print(i,l)
+def lagrange(x,y):        
+    n=len(x)
+    print(n)
+    xx = symbols('x')
+    print("Lagrange interpolating polynomials:")
+    for i in range(len(x)):    
+        print(i)
+        l=1    
+        for j in range(len(y)):
+            if i!=j :
+                l=l*((xx-x[j])/(x[i]-x[j]))
+        ll = expand(l)
+        print("L"+str(i), ll)    
+    print("Lagrange polynom")
+    for i in range(len(x)): 
+        print(i)
+        print(str(y[i])+"*L"+str(i),end='')
+        if i<len(x)-1:
+             print("+",end='')
+             
 
-print("Lagrange polynom")
-for i in range(len(x)): 
-    print(str(y[i])+"*L"+str(i),end='')
-    if i<len(x)-1:
-         print("+",end='')
+x=[0,1,2]
+y=[4,7,10]
+lagrange(x,y)
